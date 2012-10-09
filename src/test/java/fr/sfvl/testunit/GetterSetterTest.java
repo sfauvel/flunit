@@ -62,58 +62,58 @@ public class GetterSetterTest {
 	}
 
     /**
-     * Exemple de test des méthodes get et set sur l'objet.
-     */
-    @Test
-    public void testGetterSetter() {
-        MonObjet monObjet = new MonObjet();
-        Assert.assertNull(monObjet.getNom());
-        monObjet.setNom("Toto");
-        Assert.assertEquals("Toto", monObjet.getNom());
-        monObjet.setNom(null);
-        Assert.assertNull(monObjet.getNom());
-    }
+	     * Exemple de test des méthodes get et set sur l'objet.
+	     */
+	    @Test
+	    public void testCreateterSetter() {
+	        MonObjet monObjet = new MonObjet();
+	        Assert.assertNull(monObjet.getNom());
+	        monObjet.setNom("Toto");
+	        Assert.assertEquals("Toto", monObjet.getNom());
+	        monObjet.setNom(null);
+	        Assert.assertNull(monObjet.getNom());
+	    }
 
     /**
-     * Création d'un objet permettant de tester les getter et les setter.
-     */
-    @Test
-    public void testGetterSetterGeneric() {
-
-        GetterSetter<MonObjet> assertGetSet = new GetterSetter<MonObjet>(MonObjet.class);
-
-		assertGetSet.on.getNom();
-        assertGetSet.on.getAge();
-
-        assertGetSet.withString().getNom();
-       
-        assertGetSet.with("MaValeur", "AutreValeur").getNom();
-    }
+	     * Création d'un objet permettant de tester les getter et les setter.
+	     */
+	    @Test
+	    public void testCreateterSetterGeneric() {
+	
+	        GetterSetter<MonObjet> assertGetSet = GetterSetter.create(MonObjet.class);
+	
+			assertGetSet.on.getNom();
+	        assertGetSet.on.getAge();
+	
+	        assertGetSet.withString().getNom();
+	       
+	        assertGetSet.with("MaValeur", "AutreValeur").getNom();
+	    }
     
     @Test
-    public void testGetterSetterGenericSurChampEnErreur() {
-    	GetterSetter<MonObjet> assertGetSet = new GetterSetter<MonObjet>(MonObjet.class);
-
-    	try {
-    		assertGetSet.on.getErreur();
-    		fail("Une exception aurait du être levée.");
-    	} catch (AssertionFailedError e) {
-
-    	}
-
-    }
+	    public void testCreateterSetterGenericSurChampEnErreur() {
+	    	GetterSetter<MonObjet> assertGetSet = new GetterSetter<MonObjet>(MonObjet.class);
+	
+	    	try {
+	    		assertGetSet.on.getErreur();
+	    		fail("Une exception aurait du être levée.");
+	    	} catch (AssertionFailedError e) {
+	
+	    	}
+	
+	    }
     
     @Test
-    public void testGetterSetterMethod() throws SecurityException, NoSuchMethodException {
-
-    	assertEquals(MonObjet.class.getMethod("setNom", String.class), 
-    			GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("getNom")));
-    	
-    	assertEquals(MonObjet.class.getMethod("setMarie", boolean.class), 
-    			GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("isMarie")));
-    	
-    	assertNull(GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("setNom", String.class)));
-    	
-    }
+	    public void testCreateterSetterMethod() throws SecurityException, NoSuchMethodException {
+	
+	    	assertEquals(MonObjet.class.getMethod("setNom", String.class), 
+	    			GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("getNom")));
+	    	
+	    	assertEquals(MonObjet.class.getMethod("setMarie", boolean.class), 
+	    			GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("isMarie")));
+	    	
+	    	assertNull(GetterSetter.getSetter(MonObjet.class, MonObjet.class.getMethod("setNom", String.class)));
+	    	
+	    }
    
 }

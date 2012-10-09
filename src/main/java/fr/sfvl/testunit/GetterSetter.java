@@ -26,6 +26,10 @@ public class GetterSetter<T> extends Enhancer {
 		setSuperclass(clazz);
 		on = withDefault();
 	}
+	
+	public static <T> GetterSetter<T> create(Class<T> clazz) {
+		return new GetterSetter<T>(clazz);
+	}
 
 	public T withDefault() {
 		setCallback(new MethodInterceptorGetterSetter() {
