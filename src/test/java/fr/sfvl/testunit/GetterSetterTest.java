@@ -42,6 +42,9 @@ public class GetterSetterTest {
 		}
 	}
 
+    /**
+     * Exemple de test des méthodes get et set sur l'objet.
+     */
     @Test
     public void testGetterSetter() {
         MonObjet monObjet = new MonObjet();
