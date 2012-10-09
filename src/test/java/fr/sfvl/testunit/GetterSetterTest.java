@@ -1,9 +1,11 @@
 package fr.sfvl.testunit;
 
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import junit.framework.Assert;
+import junit.framework.AssertionFailedError;
 
 import org.junit.Test;
 
@@ -12,8 +14,16 @@ import org.junit.Test;
  */
 public class GetterSetterTest {
 
+	/**
+	 * 
+	 */
 	public static class MonObjet {
 		private String nom;
+		
+		/**
+		 * Champ avec une erreur dans le setter.
+		 */
+		private String erreur;
 		private int age;
 		private boolean marie;
 		
@@ -40,6 +50,15 @@ public class GetterSetterTest {
 		public void setMarie(boolean marie) {
 			this.marie = marie;
 		}
+
+		public String getErreur() {
+			return erreur;
+		}
+
+		public void setErreur(String erreur) {
+			// Erreur dans le setter.
+			//this.erreur = erreur;
+		}
 	}
 
     /**
@@ -55,18 +74,33 @@ public class GetterSetterTest {
         Assert.assertNull(monObjet.getNom());
     }
 
+    /**
+     * Création d'un objet permettant de tester les getter et les setter.
+     */
     @Test
     public void testGetterSetterGeneric() {
 
         GetterSetter<MonObjet> assertGetSet = new GetterSetter<MonObjet>(MonObjet.class);
 
-        assertGetSet.on.getNom();
+		assertGetSet.on.getNom();
         assertGetSet.on.getAge();
 
         assertGetSet.withString().getNom();
        
-         assertGetSet.with("MaValeur", "AutreValeur").getNom();
-      
+        assertGetSet.with("MaValeur", "AutreValeur").getNom();
+    }
+    
+    @Test
+    public void testGetterSetterGenericSurChampEnErreur() {
+    	GetterSetter<MonObjet> assertGetSet = new GetterSetter<MonObjet>(MonObjet.class);
+
+    	try {
+    		assertGetSet.on.getErreur();
+    		fail("Une exception aurait du être levée.");
+    	} catch (AssertionFailedError e) {
+
+    	}
+
     }
     
     @Test
