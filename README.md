@@ -1,4 +1,4 @@
 flunit
 ======
 
-Outils autour de junit pour améliorer la lisibilité 
+Outils autour de junit pour améliorer la lisibilité.
